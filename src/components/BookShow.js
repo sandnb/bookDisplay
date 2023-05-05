@@ -27,9 +27,9 @@ if (showEdit) {
 
     return ( 
     <div className="book-show">
-        <img
+        <img 
         alt="books"
-        src={`https://picsum.photos/seed/${book.id}/200/300`}/>
+        src={`https://picsum.photos/seed/${book.id}/300/200.webp`}/>
         <div>{content}</div>
         <div className="actions">
             <button className="edit" onClick={handleEditClick}>Edit</button>
