@@ -1,13 +1,14 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import BooksContext from "../context/books";
 import BookEdit from "./BookEdit"
 
 
-function BookShow( {book, onDelete, onEdit} ) {
+function BookShow( {book} ) { // here we removed the props as we introduced the useContext
     const [showEdit,setShowEdit] = useState(false); // here we dont want to show the pencil icon / showEdit thing by default.
-
+    const { deleteBookById } = useContext(BooksContext);
 
     const handleDeleteClick = () => {
-        onDelete(book.id); // here we are deleting even in App.js through the ID value of the book created so we used book.id
+        deleteBookById(book.id); // here we are deleting even in App.js through the ID value of the book created so we used book.id but now it has been chanegd to deleteBookById
     };
 
     const handleEditClick = () => {
@@ -15,9 +16,9 @@ function BookShow( {book, onDelete, onEdit} ) {
         console.log(!showEdit)
     };
 
-    const handleSubmit = (id,newTitle) => {
+    const handleSubmit = () => { // here we removed the props as we introduced useContext and onEdit
         setShowEdit(false);
-        onEdit(id,newTitle)
+      
     }
 
 let content = <h3>{book.title}</h3>;
