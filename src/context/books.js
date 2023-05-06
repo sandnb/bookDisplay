@@ -43,6 +43,7 @@ function Provider ({ children }) { // this is a component that we make teels the
           return book.id !== id; // here we're deleting the books based on ID
         });
         setBooks(updatedBooks); 
+        console.log(response);
       }; // now this function is sent to the last BookList through prop things
 
 

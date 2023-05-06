@@ -1,9 +1,8 @@
 import BookShow from "./BookShow";
-import { useContext } from "react";
-import BooksContext from '../context/books'
+import useBookContext from "../hooks/use-books-context";
 
 function BookList( ) { // here we map out each book in the list of the books array so thats why we used the arg as book as this rendereing is for each book in the list.But after introducing useContext we remove the props
-    const{ books } = useContext(BooksContext);
+    const{ books } = useBookContext();
    
 
     const renderedBooks = books.map((book) => { // here we are sending/Passing Down each book in the list of books array to the BookShow Component whihc render each book on to the screen 
