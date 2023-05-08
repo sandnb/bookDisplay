@@ -1,4 +1,4 @@
-import { createContext , useState } from 'react';
+import { createContext , useState , useCallback } from 'react';
 import axios from "axios";
 
 const BooksContext = createContext ();
@@ -6,11 +6,15 @@ const BooksContext = createContext ();
 function Provider ({ children }) { // this is a component that we make teels the Provider in return statement that what data to be shared.
     const[books,setBooks] = useState([]); // we have defined the state of the books in App as this is the parent component of all components so here if we made new changes/additions of books then that change is made in all children elements.
     // and also useState intially create a new reference to the empty array named 'books' that we give it as arg intially.
-   const fetchBooks = async () => {
+   const fetchBooks = useCallback(async () => {
      const response = await axios.get('http://localhost:3001/books');
      setBooks(response.data);
 
-   };
+   }, []);
+  //  const stableFetchBooks = useCallback(
+  //   fetchBooks, // our first function is the 1st arg of useCallback as here when initial rendering this stableFetchBooks will point to same part of the memory where the fetchBooks is pointing
+  //   [] // it is important to have an array as 2nd arg and also here we have an empty array as from 2nd render react gonna see the useCallback has empty array means this useCallback gives us back the original fetchBooks from 1st renderas it ignores the 1st arg.
+  // ); // instead of dng this we can also do the above thing to teh fetchBooks
 
      const createBook = async (title) => { // here the name of the passing arg can be anything as we are sending title as arg through onCreate in BookCreate so it is not compulsory to give the arg here same name as we gave in BookCreate.js;
         // console.log("Need to add the book with the title:",title); // here we created the event handler and send the title as arg into the function and we will pass this event handler as a prop to BookCreate;
